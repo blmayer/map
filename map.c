@@ -1,6 +1,6 @@
 #include "map.h"
 
-int add(struct node *root, char *key, void *data)
+int add(struct node *root, char *key, void *data, int len)
 {
 	struct node *curr = root;
 	while (*key) {
@@ -36,8 +36,10 @@ int add(struct node *root, char *key, void *data)
 		free(curr->content);
 	}
 
-	curr->content = malloc(strlen(data) + 1);
-	memcpy(curr->content, data, strlen(data) + 1);
+	curr->content = malloc(len);
+	while (len--) {
+		((char *)curr->content)[len] = ((char *)data)[len];
+	}
 
 	return 1;
 }

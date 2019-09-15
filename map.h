@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 struct node {
 	int count;
@@ -12,7 +11,7 @@ struct node {
 	struct node *next[];
 };
 
-int add(struct node *root, char *key, void *data);
+int add(struct node *root, char *key, void *data, int len);
 
 void *get(struct node *root, char *key);
 
