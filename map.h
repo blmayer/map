@@ -7,12 +7,12 @@
 struct node {
 	int count;
 	char letter;
-	void *content;
+	char *content;
 	struct node *next[];
 };
 
-int add(struct node *root, char *key, void *data, int len);
+int add(struct node *root, char *key, char *data);
 
-void *get(struct node *root, char *key);
+char *get(struct node *root, char *key);
 
 #endif
