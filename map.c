@@ -6,26 +6,39 @@ int init(map *root) {
 	root->content = NULL;
 }
 
-		char found = 0;
-		for (int i = 0; i < curr->count; i++) {
-			if (curr->next[i]->letter == *key) {
-				curr = curr->next[i];
+int add(map *root, char *key, char *data) {
+	map *curr = root;
+	char found = 0;
+	int i = 0, len = 0;
+
+	while (*key) {
+		/* Check next */
+		for (i = 0; i < curr->count; i++) {
+			if (curr->next[i].letter == *key) {
+				curr = (curr->next+i);
 				found = 1;
 				break;
 			}
 		}
 
-		if (!found) {
-			/* Key was not found, create one */
-			curr->next[curr->count] = malloc(sizeof(struct node));
-			curr->next[curr->count]->letter = *key;
-			curr->next[curr->count]->content = NULL;
-			curr->next[curr->count]->count = 0;
-			curr->count++;
-			curr = curr->next[curr->count - 1];
+		if (found) {
+			found = 0;
+			*key++;
+			continue;
 		}
 
-		key++;
+		/* Create the next element if not at end of key */
+		if (*key) {
+			curr->count++;
+			if (!curr->next) {
+				curr->next = calloc(1, sizeof(map));
+			} else {
+				curr->next = realloc(curr->next, (curr->count) * sizeof(map));
+			}
+			curr = &curr->next[curr->count - 1];
+			init(curr);
+		}
+		curr->letter = *(key++);
 	}
 
 	/* Free previous data */
@@ -46,13 +59,13 @@ int init(map *root) {
 	return 1;
 }
 
-char *get(struct node *root, char *key)
-{
-	struct node *curr = root;
+char *get(map *root, char *key) {
+	map *curr = root;
+	int i = 0;
 	while (*key) {
-		for (int i = 0; i < curr->count; i++) {
-			if (curr->next[i]->letter == *key) {
-				curr = curr->next[i];
+		for (i = 0; i < curr->count; i++) {
+			if (curr->next[i].letter == *key) {
+				curr = (curr->next+i);
 				break;
 			}
 		}
