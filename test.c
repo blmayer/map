@@ -1,10 +1,9 @@
 #include "map.h"
 #include <string.h>
 
-int main(void)
-{
-	struct node map;
-	map.count = 0;
+int main(void) {
+	map map;
+	init(&map);
 
 	int ret = add(&map, "abc", "this is test data abc");
 	if (!ret) {
