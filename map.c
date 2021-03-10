@@ -46,7 +46,6 @@ int add(map *root, char *key, char *data) {
 		free(curr->content);
 	}
 
-	int len = 0;
 	while (data[len++]) {
 		;
 	}
