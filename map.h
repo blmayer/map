@@ -4,14 +4,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct node map;
+
 struct node {
 	int count;
 	char letter;
 	char *content;
-	struct node *next[];
+	map *next;
 };
 
-int add(struct node *root, char *key, char *data);
+int init(map *root);
+
+int add(map *root, char *key, char *data);
+
+char *get(map *root, char *key);
 
 char *get(struct node *root, char *key);
 

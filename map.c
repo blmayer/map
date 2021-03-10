@@ -1,13 +1,10 @@
 #include "map.h"
 
-int add(struct node *root, char *key, char *data)
-{
-	struct node *curr = root;
-	while (*key) {
-		// Create the array for the first time
-		if (curr->count == 0) {
-			*curr->next = malloc(sizeof(struct node *));
-		}
+int init(map *root) {
+	root->count = 0;
+	root->next = NULL;
+	root->content = NULL;
+}
 
 		char found = 0;
 		for (int i = 0; i < curr->count; i++) {
