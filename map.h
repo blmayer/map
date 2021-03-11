@@ -19,6 +19,6 @@ int add(map *root, char *key, char *data);
 
 char *get(map *root, char *key);
 
-char *get(struct node *root, char *key);
+int destroy(map *root);
 
 #endif

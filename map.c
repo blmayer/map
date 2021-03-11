@@ -31,7 +31,7 @@ int add(map *root, char *key, char *data) {
 		if (*key) {
 			curr->count++;
 			if (!curr->next) {
-				curr->next = calloc(1, sizeof(map));
+				curr->next = malloc(sizeof(map));
 			} else {
 				curr->next = realloc(curr->next, (curr->count) * sizeof(map));
 			}
@@ -64,7 +64,7 @@ char *get(map *root, char *key) {
 	while (*key) {
 		for (i = 0; i < curr->count; i++) {
 			if (curr->next[i].letter == *key) {
-				curr = (curr->next+i);
+				curr = &curr->next[i];
 				break;
 			}
 		}
@@ -72,4 +72,23 @@ char *get(map *root, char *key) {
 		key++;
 	}
 	return curr->content;
+}
+
+int destroy(map *root) {
+	int i, count = 1;
+
+	/* Descent into each next element and destroy it */
+	for (i = 0; i < root->count; i++) {
+		count += destroy(&root->next[i]);
+	}
+	
+	/* Erase itself	*/
+	if (root->content) {
+		free(root->content);
+	}
+	if (root->next) {
+		free(root->next);
+	}
+	
+	return count;
 }
