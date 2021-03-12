@@ -32,7 +32,7 @@ if (!ret) {
 }
 
 /* Go retrieve data back use the get function */
-char *data = get(&m, "abc);
+char *data = get(&m, "abc");
 puts(data);
 
 /* Lastly, destroy the map */
