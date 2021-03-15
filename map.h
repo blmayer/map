@@ -19,6 +19,8 @@ int add(map *root, char *key, char *data);
 
 char *get(map *root, char *key);
 
+int delete(map *root, char *key);
+
 int destroy(map *root);
 
 #endif

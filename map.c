@@ -74,6 +74,29 @@ char *get(map *root, char *key) {
 	return curr->content;
 }
 
+int delete(map *root, char *key) {
+	map *curr = root;
+	int i = 0;
+	while (*key) {
+		for (i = 0; i < curr->count; i++) {
+			if (curr->next[i].letter == *key) {
+				curr = &curr->next[i];
+				break;
+			}
+		}
+
+		key++;
+	}
+
+	/* Delete only the content */
+	if (curr->content) {
+		free(curr->content);
+		curr->content = NULL;
+	}
+
+	return 1;
+}
+
 int destroy(map *root) {
 	int i, count = 1;
 
