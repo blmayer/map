@@ -31,7 +31,7 @@ if (!ret) {
     exit(1);
 }
 
-/* Go retrieve data back use the get function */
+/* To retrieve data back use the get function */
 char *data = get(&m, "abc");
 puts(data);
 
