@@ -12,7 +12,7 @@ int init(map *root) {
 	return 1;
 }
 
-int add(map *root, char *key, char *data) {
+int add(map *root, const char *key, const char *data) {
 	map *curr = root;
 	char found = 0;
 	int i = 0, len = 0;
@@ -77,7 +77,7 @@ int add(map *root, char *key, char *data) {
 	return 1;
 }
 
-char *get(map *root, char *key) {
+const char *get(map *root, const char *key) {
 	map *curr = root;
 	int i = 0;
 	while (*key) {
@@ -93,7 +93,7 @@ char *get(map *root, char *key) {
 	return curr->content;
 }
 
-int delete(map *root, char *key) {
+int delete(map *root, const char *key) {
 	map *curr = root;
 	int i = 0;
 	while (*key) {

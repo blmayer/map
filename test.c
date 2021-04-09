@@ -25,7 +25,7 @@ void testadd(map *root) {
 }
 
 void testget(map *root) {
-	char *res = get(root, "abc");
+	const char *res = get(root, "abc");
 	if (strcmp(res, "this is the new test data abc") != 0) {
 		printf("ERROR: abc returned '%s'\n", res);
 		exit(4);
@@ -56,8 +56,7 @@ void testdelete(map *root) {
 		exit(7);
 	}
 
-	char *content = get(root, "abc");
-	printf("content: %p: %s\n", content, content);
+	const char *content = get(root, "abc");
 	if (content) {
 		puts("ERROR: abc is not null");
 		exit(8);
@@ -73,6 +72,7 @@ void testdestroy(map *root) {
 		puts("ERROR: destroy returned 0");
 		exit(9);
 	}
+	puts("destroy(root): PASS");
 }
 
 int main(void) {

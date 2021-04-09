@@ -15,11 +15,11 @@ struct node {
 
 int init(map *root);
 
-int add(map *root, char *key, char *data);
+int add(map *root, const char *key, const char *data);
 
-char *get(map *root, char *key);
+const char *get(map *root, const char *key);
 
-int delete(map *root, char *key);
+int delete(map *root, const char *key);
 
 int destroy(map *root);
 
