@@ -9,7 +9,9 @@
                 "-fsanitize=address",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-L${workspaceFolder}",
+                "-lmap"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

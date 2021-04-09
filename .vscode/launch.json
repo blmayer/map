@@ -12,7 +12,12 @@
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "environment": [],
+            "environment": [
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "$LD_LIBRARY_PATH:${workspaceFolder}"
+                }
+            ],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
