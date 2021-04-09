@@ -41,8 +41,16 @@ int add(map *root, char *key, char *data) {
 			} else {
 				curr->next = realloc(curr->next, (curr->count) * sizeof(map));
 			}
+			if (!curr->next) {
+				puts("next allocation error");
+				return 0;
+			}
+
 			curr = &curr->next[curr->count - 1];
-			init(curr);
+			if (!init(curr)) {
+				puts("initialization error");
+				return 0;
+			}
 		}
 		curr->letter = *(key++);
 	}
@@ -57,6 +65,11 @@ int add(map *root, char *key, char *data) {
 	}
 
 	curr->content = malloc(len);
+	if (!curr->content) {
+		puts("content allocation error");
+		return 0;
+	}
+
 	while (len--) {
 		curr->content[len] = data[len];
 	}
