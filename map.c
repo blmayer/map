@@ -1,9 +1,15 @@
 #include "map.h"
 
 int init(map *root) {
+	if (!root) {
+		return 0;
+	}
+
 	root->count = 0;
 	root->next = NULL;
 	root->content = NULL;
+
+	return 1;
 }
 
 int add(map *root, char *key, char *data) {
