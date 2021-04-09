@@ -80,26 +80,35 @@ int add(map *root, const char *key, const char *data) {
 const char *get(map *root, const char *key) {
 	map *curr = root;
 	int i = 0;
+	char found;
+
 	while (*key) {
+		found = 0;
 		for (i = 0; i < curr->count; i++) {
 			if (curr->next[i].letter == *key) {
 				curr = &curr->next[i];
+				found = 1;
 				break;
 			}
 		}
 
 		key++;
 	}
-	return curr->content;
+	
+	return found ? curr->content : NULL;
 }
 
 int delete(map *root, const char *key) {
 	map *curr = root;
 	int i = 0;
+	char found;
+
 	while (*key) {
+		found = 0;
 		for (i = 0; i < curr->count; i++) {
 			if (curr->next[i].letter == *key) {
 				curr = &curr->next[i];
+				found = 1;
 				break;
 			}
 		}
@@ -108,7 +117,7 @@ int delete(map *root, const char *key) {
 	}
 
 	/* Delete only the content */
-	if (curr->content) {
+	if (found && curr->content) {
 		free(curr->content);
 		curr->content = NULL;
 	}
