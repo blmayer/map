@@ -39,6 +39,7 @@ int main(void) {
         value = realloc(value, 100);
         rand_str(source, 100, value);
         init(&root);
+	time = 0;
         
         for (times = 1000; times > 0; times--) {
             key = realloc(key, n);
@@ -61,6 +62,7 @@ int main(void) {
         value = realloc(value, 100);
         rand_str(source, 100, value);
         init(&root);
+	time = 0;
         
         for (times = 1000; times > 0; times--) {
             key = realloc(key, n);
@@ -80,8 +82,8 @@ int main(void) {
 
     /* Bench capacity time */
     init(&root);
-    puts("adding elements");
-    for (n = 1; n < __INT_MAX__; n++) {
+    time = 0;
+    for (n = 1; n < 1000000; n++) {
         rand_str(source, 100, value);
         rand_str(source, 100, key);
 
@@ -94,7 +96,47 @@ int main(void) {
         gettimeofday(&end, NULL);
         time += time_diff(start, end);
     
-        printf("\relements: %ld, time: %f", n, time);
     }
+    printf("add,100,%ld,%f\n", n, time);
+    destroy(&root);
+
+    init(&root);
+    time = 0;
+    for (n = 1; n < 2000000; n++) {
+        rand_str(source, 100, value);
+        rand_str(source, 100, key);
+
+        /* Count the time */
+        gettimeofday(&start, NULL);
+        if (!add(&root, key, value)) {
+            puts("add() error");
+            break;
+        }
+        gettimeofday(&end, NULL);
+        time += time_diff(start, end);
+    
+    }
+    printf("add,100,%ld,%f\n", n, time);
+    destroy(&root);
+
+    init(&root);
+    time = 0;
+    for (n = 1; n < 3000000; n++) {
+        rand_str(source, 100, value);
+        rand_str(source, 100, key);
+
+        /* Count the time */
+        gettimeofday(&start, NULL);
+        if (!add(&root, key, value)) {
+            puts("add() error");
+            break;
+        }
+        gettimeofday(&end, NULL);
+        time += time_diff(start, end);
+    
+    }
+    printf("add,100,%ld,%f\n", n, time);
+    destroy(&root);
+
     fclose(source);
 }
