@@ -51,7 +51,7 @@ int main(void) {
             time += time_diff(start, end);
         }
 
-        printf("add,%d,1000,%f\n", n, time);
+        printf("add,%ld,1000,%f\n", n, time);
 
         destroy(&root);
     }
@@ -73,31 +73,28 @@ int main(void) {
             time += time_diff(start, end);
         }
 
-        printf("get,%d,1000,%f\n", n, time);
+        printf("get,%ld,1000,%f\n", n, time);
 
         destroy(&root);
     }
 
     /* Bench capacity time */
-    puts("op,length,times,usec");
-    for (n = 1; n < 50; n ++) {
-        value = realloc(value, 100);
+    init(&root);
+    puts("adding elements");
+    for (n = 1; n < __INT_MAX__; n++) {
         rand_str(source, 100, value);
-        init(&root);
-        
-        for (times = 1000000; times > 0; times--) {
-            key = realloc(key, n);
-            rand_str(source, n, key);
+        rand_str(source, 100, key);
 
-            /* Count the time */
-            gettimeofday(&start, NULL);
-            add(&root, key, value);
-            gettimeofday(&end, NULL);
-            time += time_diff(start, end);
+        /* Count the time */
+        gettimeofday(&start, NULL);
+        if (!add(&root, key, value)) {
+            puts("add() error");
+            break;
         }
-
-        printf("add,%d,100000,%f\n", n, time);
-
-        destroy(&root);
+        gettimeofday(&end, NULL);
+        time += time_diff(start, end);
+    
+        printf("\relements: %ld, time: %f", n, time);
     }
+    fclose(source);
 }
