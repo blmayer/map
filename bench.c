@@ -3,7 +3,7 @@
 #include <string.h>
 #include <sys/time.h>
 
-int rand_str(FILE *source, int n, char *out) {
+void rand_str(FILE *source, int n, char *out) {
 	int i = n;
     fread(out, 1, n, source);
 
@@ -97,4 +97,6 @@ int main(void) {
         printf("\relements: %ld, time: %f", n, time);
     }
     fclose(source);
+
+    return 0;
 }
