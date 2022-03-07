@@ -7,10 +7,10 @@
 typedef struct node map;
 
 struct node {
-	int count;
-	char letter;
 	char *content;
 	map *next;
+	int count;
+	char letter;
 };
 
 int init(map *root);
